@@ -1,11 +1,8 @@
-from datetime import datetime
-import dash
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
-
-from server import app, server
+import json
+from server import app
 
 
 def project_list():
@@ -23,16 +20,15 @@ def project_list():
                                     html.H6("Description : {}".format(x["Description"]), className="card-subtitle"),
                                     html.Div(
                                         [
-                                            dbc.Button("Test", style={"margin-right": "4px"}),
-                                            dbc.Button("Open", style={"margin-right": "4px"}),
+                                            dbc.Button("Test", style={"margin-right": "16px"}),
+                                            dbc.Button("Open", style={"margin-right": "16px"}),
+                                            dbc.Button("Delete", style={"margin-right": "16px"}),
                                             dbc.Badge("Success", style={"float": "right"})
                                         ],
-                                    ),
-                                    # dbc.CardLink("Card link", href="#"),
-                                    # dbc.CardLink("External link", href="https://google.com"),
+                                    )
                                 ]
                             ),
-                            style={"width": "80rem"},
+                            style={"width": "65rem"},
                         )
                     ],
                     width="auto"
@@ -94,7 +90,7 @@ def create_project():
 
 
 def layout():
-    return html.Div(
+    return dbc.Container(
         [
             create_project(),
             project_list()
@@ -118,9 +114,19 @@ def create_project_submit_btn_update(email, message):
      State("Create_Project_Name_ID", "value"),
      State("Create_Project_Description_Id", "value")],
 )
-def toggle_modal(n1, n2, is_open, email, message):
+def toggle_modal(n1, n2, is_open, project, description):
     print(n1, n2)
     if n1 or n2:
-        print(email, message)
+        if project and description:
+            print(project, description)
+            projects = eval(open("data/projects/projects.json", "r").read())
+            p = {
+                "Project": project,
+                "Description": description
+            }
+            projects.append(p)
+            with open("data/projects/projects.json", "w") as f:
+                f.writelines(json.dumps(projects, indent=4, sort_keys=True))
+                f.write("\n")
         return not is_open
     return is_open
