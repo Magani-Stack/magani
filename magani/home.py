@@ -3,33 +3,17 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import json
 from server import app
+from utils.card_util import CreateProjectCard
 
 
 def project_list():
-    projects = eval(open("data/projects/projects.json", "r").read())
-    i = 3
+    projects = eval(open("data/projects/projects.json", "r").read(), {"null": None})
     list_of_projects = [
         dbc.Row(
             [
                 dbc.Col(
                     [
-                        dbc.Card(
-                            dbc.CardBody(
-                                [
-                                    html.H4("Project : {}".format(x["Project"]), className="card-title"),
-                                    html.H6("Description : {}".format(x["Description"]), className="card-subtitle"),
-                                    html.Div(
-                                        [
-                                            dbc.Button("Test", style={"margin-right": "16px"}),
-                                            dbc.Button("Open", style={"margin-right": "16px"}),
-                                            dbc.Button("Delete", style={"margin-right": "16px"}),
-                                            dbc.Badge("Success", style={"float": "right"})
-                                        ],
-                                    )
-                                ]
-                            ),
-                            style={"width": "65rem"},
-                        )
+                        CreateProjectCard(x["Project"], x["Description"]).get()
                     ],
                     width="auto"
                 )
@@ -84,7 +68,7 @@ create_modal = dbc.Modal(
 
 def create_project():
     return html.Div([
-        dbc.Button("Create Project", id="Create_Project_ID"),
+        dbc.Button("Create Project", id="Create_Project_ID", style={"text-align": "center"}),
         create_modal
     ])
 
@@ -119,10 +103,11 @@ def toggle_modal(n1, n2, is_open, project, description):
     if n1 or n2:
         if project and description:
             print(project, description)
-            projects = eval(open("data/projects/projects.json", "r").read())
+            projects = eval(open("data/projects/projects.json", "r").read(), {"null": None})
             p = {
                 "Project": project,
-                "Description": description
+                "Description": description,
+                "TestCase": []
             }
             projects.append(p)
             with open("data/projects/projects.json", "w") as f:

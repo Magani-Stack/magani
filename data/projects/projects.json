@@ -1,10 +1,41 @@
 [
-  {
-    "Project": "A",
-    "Description": "A is Z"
-  },
-  {
-    "Project": "B",
-    "Description": "B is C"
-  }
+    {
+        "Description": "Magani Stack",
+        "Project": "Magani",
+        "TestCase": [
+            {
+                "API": "/V1",
+                "Body": null,
+                "ID": "Magani_20200211162414728042",
+                "Method": "POST",
+                "Status": "Success"
+            }
+        ]
+    },
+    {
+        "Description": "Google Test",
+        "Project": "Google",
+        "TestCase": [
+            {
+                "API": "www.google.com",
+                "Body": null,
+                "ID": "Google_20200211162215081294",
+                "Method": "GET",
+                "Status": "Success"
+            }
+        ]
+    },
+    {
+        "Description": "A is Z",
+        "Project": "A",
+        "TestCase": [
+            {
+                "API": "/v1",
+                "Body": "Hi",
+                "ID": "Google_202002111622150812940",
+                "Method": "POST",
+                "Status": "Success"
+            }
+        ]
+    }
 ]

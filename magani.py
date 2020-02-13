@@ -6,7 +6,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
 from config import APP_TITLE_NAME, SUB_TITLE_NAME
-from magani import home
+from magani import home, project, run_test_case, delete_test_case
 from server import app
 
 header = dbc.Container(
@@ -139,7 +139,7 @@ app.layout = html.Div(
             className='container-width',
             style={"width": "100%"}
         ),
-        dcc.Location(id='url', refresh=False),
+        dcc.Location(id='url', refresh=True),
         html.Br(style={'padding': 10}),
         footer
     ],
@@ -150,10 +150,22 @@ app.layout = html.Div(
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
+    print("path : ", pathname, type(pathname))
+    print(pathname and len(str(pathname).split("/")) == 2)
+
+    paths = pathname.split("/") if pathname else pathname
+    print("path list", paths)
     if pathname == '/':
         return home.layout()
+    elif pathname and len(str(pathname).split("/")) == 2:
+        return project.layout(pathname.strip("/").split("/")[0])
+    elif pathname and len(str(pathname).split("/")) in [3, 4]:
+        if str(pathname).split("/")[-1] == "delete":
+            return delete_test_case.layout(pathname)
+        # elif str(pathname).split("/")[-1] == "test":
+        #     return
     else:
-        return '404'
+        return dbc.Container([html.H1("404")])
 
 
 @app.callback(
