@@ -14,15 +14,18 @@ header = dbc.Container(
         [
             dbc.Col(
                 [
-                    html.Img(
-                        src=app.get_asset_url("dash-logo.png"),
-                        id="plotly-image",
-                        style={
-                            "height": "60px",
-                            "width": "auto",
-                            "margin-bottom": "25px",
-                        },
-                    )
+                    html.A(
+                        html.Img(
+                            src=app.get_asset_url("mg.jpg"),
+                            id="plotly-image",
+                            style={
+                                "height": "80px",
+                                "width": "auto",
+                                # "margin-bottom": "25px",
+                            },
+                        ),
+                        href="/"),
+
                 ],
                 width=2
             ),
@@ -139,7 +142,7 @@ app.layout = html.Div(
             className='container-width',
             style={"width": "100%"}
         ),
-        dcc.Location(id='url', refresh=True),
+        dcc.Location(id='url', refresh=False),
         html.Br(style={'padding': 10}),
         footer
     ],
@@ -162,6 +165,8 @@ def display_page(pathname):
     elif pathname and len(str(pathname).split("/")) in [3, 4]:
         if str(pathname).split("/")[-1] == "delete":
             return delete_test_case.layout(pathname)
+        elif str(pathname).split("/")[-1] == "test":
+            return run_test_case.layout(pathname)
         # elif str(pathname).split("/")[-1] == "test":
         #     return
     else:
