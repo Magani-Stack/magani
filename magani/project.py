@@ -14,7 +14,7 @@ def get_test_cards(project):
     test_cases = test_cases[0] if test_cases else test_cases
 
     test_case_cards = [
-        CreateTestCard(project, y["API"], y["ID"], y["Method"]).get() for y in test_cases
+        CreateTestCard(project, y["API"], y["ID"], y["Method"], y["Status"]).get() for y in test_cases
     ]
 
     test_create_button = dbc.Button("+", id="Create_Test_Case_Btn_ID", style={"width": "20rem", "height": "8rem"})

@@ -26,7 +26,7 @@ class CreateProjectCard(CreateCard):
                         dbc.CardLink(dbc.Button("Open", style={"margin-right": "16px"}), href=project_name),
                         dbc.CardLink(dbc.Button("Delete", style={"margin-right": "16px"}),
                                      href="{}/delete".format(project_name)),
-                        dbc.Badge("Success", style={"float": "right"})
+                        # dbc.Badge("Success", style={"float": "right"})
                     ], )
                 ]
             ),
@@ -36,8 +36,9 @@ class CreateProjectCard(CreateCard):
 
 class CreateTestCard(CreateCard):
 
-    def __init__(self, project, api, api_id, method):
+    def __init__(self, project, api, api_id, method, status):
         super().__init__()
+        print("status", status)
         self.card = dbc.Card(
             dbc.CardBody(
                 [
@@ -48,7 +49,7 @@ class CreateTestCard(CreateCard):
                                      href="{}/{}/test".format(project, api_id)),
                         dbc.CardLink(dbc.Button("Delete", style={"margin-right": "16px"}),
                                      href="{}/{}/delete".format(project, api_id)),
-                        dbc.Badge("Success", color="success", style={"float": "right"})
+                        # dbc.Badge(status, color="success", style={"float": "right"})
                     ], )
                 ]
             ),

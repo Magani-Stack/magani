@@ -43,11 +43,12 @@ class HttpClient:
             response = Response(e)
             return response
         except Exception as e:
+            print(e)
             r = {
                 "body": str(e),
                 "status_code": 500
             }
-            return r
+            return json.loads(json.dumps(r))
 
 
 if __name__ == "__main__":
