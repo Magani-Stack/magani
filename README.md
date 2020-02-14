@@ -6,7 +6,7 @@
 * REST API testing software
 
 
-Create you test cases and test in project level as well as test case level. Only Public API is supporting. You can use inside private network without authentication.
+Create test cases and test in project level as well as test case level. Only Public API is supporting. You can use inside private network without authentication.
 
 
 ### Testing methods
