@@ -1,18 +1,5 @@
 [
     {
-        "Description": "A is Z",
-        "Project": "A",
-        "TestCase": [
-            {
-                "API": "/v1",
-                "Body": "Hi",
-                "ID": "Google_202002111622150812940",
-                "Method": "POST",
-                "Status": "Success"
-            }
-        ]
-    },
-    {
         "Description": "Google Test",
         "Project": "Google",
         "TestCase": [
@@ -40,6 +27,26 @@
                 "API": "http://www.ggg.com",
                 "Body": null,
                 "ID": "Magani_20200213160827312031",
+                "Method": "GET",
+                "Status": "Success"
+            }
+        ]
+    },
+    {
+        "Description": "A is Z",
+        "Project": "A",
+        "TestCase": [
+            {
+                "API": "http://localhost:8050/test/local",
+                "Body": null,
+                "ID": "A_20200213182016491163",
+                "Method": "GET",
+                "Status": "Success"
+            },
+            {
+                "API": "http://localhost:8000/test",
+                "Body": null,
+                "ID": "A_20200213182148122588",
                 "Method": "GET",
                 "Status": "Success"
             }

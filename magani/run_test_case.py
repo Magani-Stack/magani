@@ -22,9 +22,9 @@ def layout(pathname):
         response = HttpClient(tcs["API"]).get()
         return dbc.Container(
             [
-                html.H1("Test Case : {}".format(tcs["API"])),
+                html.H1("Test Case : {}".format(tcs["API"]), style={"text-align": "center", "color": "red"}),
                 html.H2("Status : {}".format(response.status_code)),
-                html.P("Response : {}".format(response.body.decode("utf-8")))
+                html.P("Response : {}".format(response.body))
             ]
         )
     else:
@@ -35,7 +35,7 @@ def layout(pathname):
             response = HttpClient(test_case["API"]).get()
             lt.append(html.Div(
                 [
-                    html.H1("Test Case : {}".format(test_case["API"])),
+                    html.H1("Test Case : {}".format(test_case["API"]), style={"text-align": "center", "color": "red"}),
                     html.H2("Status : {}".format(response.status_code)),
                     html.P("Response : {}".format(response.body))
                 ]
