@@ -57,7 +57,7 @@ class CreateTestCaseModal(CreateModal):
 
         method_input = dbc.FormGroup(
             [
-                dbc.Label("API", html_for="Test_Case_API_ID"),
+                dbc.Label("Method", html_for="Test_Case_API_ID"),
                 dcc.Dropdown(id="Test_Case_Method_ID", options=[{'label': x, 'value': x} for x in methods],
                              multi=False),
             ]

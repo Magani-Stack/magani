@@ -4,10 +4,11 @@ from dash.dependencies import Input, Output, State
 import json
 from server import app
 from utils.card_util import CreateProjectCard
+from utils.file_util import read_project_file
 
 
 def project_list():
-    projects = eval(open("data/projects/projects.json", "r").read(), {"null": None})
+    projects = read_project_file()
     list_of_projects = [
         dbc.Row(
             [
@@ -68,9 +69,10 @@ create_modal = dbc.Modal(
 
 def create_project():
     return html.Div([
-        dbc.Button("Create Project", id="Create_Project_ID", style={"text-align": "center"}),
+        dbc.Button("Create Project", id="Create_Project_ID"),
         create_modal
-    ])
+    ],
+        style={"text-align": "center", "margin-bottom": "32px"})
 
 
 def layout():
@@ -103,7 +105,7 @@ def toggle_modal(n1, n2, is_open, project, description):
     if n1 or n2:
         if project and description:
             print(project, description)
-            projects = eval(open("data/projects/projects.json", "r").read(), {"null": None})
+            projects = read_project_file()
             p = {
                 "Project": project,
                 "Description": description,

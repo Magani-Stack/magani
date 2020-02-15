@@ -1,9 +1,31 @@
-import dash_core_components as dcc
-import dash_html_components as html
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 
 from utils.file_util import read_project_file, write_project_file
 from utils.http_client import HttpClient
+
+
+class RunTestCase:
+
+    def __init__(self):
+        self.html_response = ""
+
+    def run(self, test_case):
+        response = HttpClient(test_case["API"]).get()
+        self.html_response = html.Div(
+            [
+                html.H1("Test Case : {}".format(test_case["API"]), style={"text-align": "center", "color": "red"}),
+                html.H2("Status : {}".format(response.status_code)),
+                html.P("Response : {}".format(response.body))
+            ]
+        )
+        test_case["ResponseBody"] = response.body
+        test_case["StatusCode"] = response.status_code
+        test_case["Status"] = response.status
+        return self.html_response
+
+    def get_html(self):
+        return self.html_response
 
 
 def layout(pathname):
@@ -16,31 +38,22 @@ def layout(pathname):
     api_id = lt[1] if len(lt) == 3 else None
 
     projects_new = read_project_file()
-    project_test = [p for p in projects_new if p["Project"] == project][0]
-    if api_id:
-        tcs = [tc for tc in project_test["TestCase"] if tc["ID"] == api_id][0]
-        response = HttpClient(tcs["API"]).get()
-        return dbc.Container(
-            [
-                html.H1("Test Case : {}".format(tcs["API"]), style={"text-align": "center", "color": "red"}),
-                html.H2("Status : {}".format(response.status_code)),
-                html.P("Response : {}".format(response.body))
-            ]
-        )
-    else:
-        lt = [
-            html.H1("Testing project {} ".format(project))
-        ]
-        for test_case in project_test["TestCase"]:
-            response = HttpClient(test_case["API"]).get()
-            lt.append(html.Div(
-                [
-                    html.H1("Test Case : {}".format(test_case["API"]), style={"text-align": "center", "color": "red"}),
-                    html.H2("Status : {}".format(response.status_code)),
-                    html.P("Response : {}".format(response.body))
-                ]
-            ))
 
-        return dbc.Container(
-            lt
-        )
+    lt = []
+    for p in projects_new:
+        if p["Project"] == project:
+            if api_id:
+                for tc in p["TestCase"]:
+                    if tc["ID"] == api_id:
+                        lt.append(RunTestCase().run(tc))
+            else:
+                lt = [
+                    html.H1("Testing project {} ".format(project), style={"text-align": "center", "color": "Blue"})
+                ]
+                for test_case in p["TestCase"]:
+                    lt.append(RunTestCase().run(test_case))
+
+    write_project_file(projects_new)
+    return dbc.Container(
+        lt
+    )

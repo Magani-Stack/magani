@@ -4,9 +4,11 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
+from flask import redirect
 
 from config import APP_TITLE_NAME, SUB_TITLE_NAME
-from magani import home, project, run_test_case, delete_test_case
+from config import MAGANI_HOST, MAGANI_PORT
+from magani import home, project, run_test_case, delete_test_case, export_text_case
 from server import app
 
 header = dbc.Container(
@@ -142,7 +144,7 @@ app.layout = html.Div(
             className='container-width',
             style={"width": "100%"}
         ),
-        dcc.Location(id='url', refresh=False),
+        dcc.Location(id='url', refresh=True),
         html.Br(style={'padding': 10}),
         footer
     ],
@@ -167,10 +169,17 @@ def display_page(pathname):
             return delete_test_case.layout(pathname)
         elif str(pathname).split("/")[-1] == "test":
             return run_test_case.layout(pathname)
-        # elif str(pathname).split("/")[-1] == "test":
-        #     return
+        elif str(pathname).split("/")[-1] == "export":
+            return redirect("{}".format(pathname), code=302)
+        else:
+            home.layout()
     else:
         return dbc.Container([html.H1("404")])
+
+
+@app.server.route('/<project>/export')
+def download_file(project):
+    return export_text_case.layout(project)
 
 
 @app.callback(
@@ -201,4 +210,4 @@ def submit_btn_update(email, message):
 
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(host=MAGANI_HOST, port=MAGANI_PORT)

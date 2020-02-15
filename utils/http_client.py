@@ -12,10 +12,19 @@ class Response:
 
     def __init__(self, response):
         self.status_code = response.status
+        self.status = "Success" if self.status_code == 200 else "Failed"
         self.body = response.read()
 
     def __str__(self):
         return str(self.__dict__)
+
+
+class ErrorResponse:
+
+    def __init__(self, **kwargs):
+        self.status = "Failed"
+        self.status_code = kwargs["status_code"]
+        self.body = kwargs["body"]
 
 
 class Method(Enum):
@@ -39,16 +48,16 @@ class HttpClient:
             response = Response(http_response)
             return response
         except HTTPError as e:
-            print(e)
+            print("HTTPError:", e)
             response = Response(e)
             return response
         except Exception as e:
-            print(e)
+            print("Exception:", e)
             r = {
                 "body": str(e),
                 "status_code": 500
             }
-            return json.loads(json.dumps(r))
+            return ErrorResponse(**r)
 
 
 if __name__ == "__main__":
