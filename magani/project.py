@@ -6,10 +6,11 @@ from server import app
 from utils.card_util import CreateTestCard
 from utils.modal_util import CreateTestCaseModal
 from datetime import datetime
+from utils.file_util import read_project_file, write_project_file
 
 
 def get_test_cards(project):
-    projects = eval(open("data/projects/projects.json", "r").read(), {"null": None})
+    projects = read_project_file()
     test_cases = [y["TestCase"] for y in projects if y["Project"] == project]
     test_cases = test_cases[0] if test_cases else test_cases
 
@@ -40,7 +41,7 @@ def get_test_cards(project):
 
 
 def layout(project):
-    projects = eval(open("data/projects/projects.json", "r").read(), {"null": None})
+    projects = read_project_file()
     is_exist = project in [x["Project"] for x in projects]
     if is_exist:
         return html.Div(
@@ -75,27 +76,26 @@ def create_test_submit_btn_update(email, message):
     [State("Create_Test_Case_Modal_ID", "is_open"),
      State("Test_Case_Project_ID", "value"),
      State("Test_Case_API_ID", "value"),
-     State("Test_Case_Method_ID", "value")],
+     State("Test_Case_Method_ID", "value"),
+     State("Test_Case_Body_ID", "value")],
 )
-def toggle_modal(n1, n2, is_open, project, api, method):
+def toggle_modal(n1, n2, is_open, project, api, method, body):
     print(n1, n2)
     if n1 or n2:
         if api and method:
             print(api, method)
-            projects = eval(open("data/projects/projects.json", "r").read(), {"null": None})
+            projects = read_project_file()
             p = [x for x in projects if x["Project"] == project][0]
             api_id = str(datetime.now()).replace(" ", "").replace(":", "").replace("-", "").replace(".", "")
 
             t = {
                 "ID": "{}_{}".format(project, api_id),
                 "API": api,
-                "Body": None,
+                "Body": json.dumps(body) if body else None,
                 "Method": method,
                 "Status": "Success"
             }
             p["TestCase"].append(t)
-            with open("data/projects/projects.json", "w") as f:
-                f.writelines(json.dumps(projects, indent=4, sort_keys=True))
-                f.write("\n")
+            write_project_file(projects)
         return not is_open
     return is_open
