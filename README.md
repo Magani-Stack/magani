@@ -12,9 +12,9 @@ Create test cases and test in project level as well as test case level. Only Pub
 ### Testing methods
 
 * GET : Implemented
-* POST : Not Implemented
-* PUT : Not Implemented
-* DELETE : Not Implemented
+* POST : Implemented
+* PUT : Implemented
+* DELETE : Implemented
 
 ### Future Support
 
