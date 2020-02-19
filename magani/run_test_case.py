@@ -11,7 +11,7 @@ class RunTestCase:
         self.html_response = ""
 
     def run(self, test_case):
-        response = HttpClient(test_case["API"]).get()
+        response = HttpClient(test_case["API"]).method(test_case["Method"])(test_case["Body"])
         self.html_response = html.Div(
             [
                 html.H1("Test Case : {}".format(test_case["API"]), style={"text-align": "center", "color": "red"}),

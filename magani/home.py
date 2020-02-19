@@ -66,10 +66,19 @@ create_modal = dbc.Modal(
     centered=True,
 )
 
+xxx = {
+    "data-ad-client": "ca-pub-1508089654065875",
+    "data-ad-slot": "1234567890"
+}
 
 def create_project():
     return html.Div([
         dbc.Button("Create Project", id="Create_Project_ID"),
+        html.Div(
+            html.Ins(
+                style={"display": "inline-block", "width": "728px", "height": "90px"}, **xxx,
+            )
+        ),
         create_modal
     ],
         style={"text-align": "center", "margin-bottom": "32px"})

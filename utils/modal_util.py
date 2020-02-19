@@ -1,9 +1,7 @@
 import dash_bootstrap_components as dbc
-import dash_html_components as html
-from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 
-methods = ["GET", "POST"]
+methods = ["GET", "POST", "PUT", "DELETE"]
 
 
 class CreateModal:
@@ -57,11 +55,18 @@ class CreateTestCaseModal(CreateModal):
 
         method_input = dbc.FormGroup(
             [
-                dbc.Label("Method", html_for="Test_Case_API_ID"),
+                dbc.Label("Method", html_for="Test_Case_Method_ID"),
                 dcc.Dropdown(id="Test_Case_Method_ID", options=[{'label': x, 'value': x} for x in methods],
                              multi=False),
             ]
         )
 
-        form = dbc.Form([project_input, api_input, method_input])
+        body_input = dbc.FormGroup(
+            [
+                dbc.Label("Body : JSON", html_for="Test_Case_Body_ID"),
+                dcc.Textarea(id="Test_Case_Body_ID", style={"width": "100%"}),
+            ]
+        )
+
+        form = dbc.Form([project_input, api_input, method_input, body_input])
         return form
