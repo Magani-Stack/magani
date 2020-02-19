@@ -18,7 +18,6 @@ Create test cases and test in project level as well as test case level. Only Pub
 
 ### Authorization 
 
-* No Auth  Implemented
 * Basic Auth : Not Implemented
 
 
