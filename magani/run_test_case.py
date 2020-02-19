@@ -15,7 +15,20 @@ class RunTestCase:
         self.html_response = html.Div(
             [
                 html.H1("Test Case : {}".format(test_case["API"]), style={"text-align": "center", "color": "red"}),
-                html.H2("Status : {}".format(response.status_code)),
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            html.H2("Method : {}".format(test_case["Method"]),
+                                    style={"text-align": "left", "color": "yellow"}),
+                            style={"width":6}
+                        ),
+                        dbc.Col(
+                            html.H2("Status : {}".format(response.status_code),
+                                    style={"text-align": "right", "color": "green"}),
+                            style={"width": 6}
+                        ),
+                    ],
+                ),
                 html.P("Response : {}".format(response.body))
             ]
         )
