@@ -16,6 +16,16 @@ Create test cases and test in project level as well as test case level. Only Pub
 * PUT : Implemented
 * DELETE : Implemented
 
+### Authorization 
+
+* No Auth  Implemented
+* Basic Auth : Not Implemented
+
+
+### Reports
+
+* Export Project wise csv file 
+
 ### Future Support
 
 * Export All test case results in excel, pdf, docs.
