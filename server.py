@@ -14,10 +14,16 @@ app = dash.Dash(
             'content': 'width=device-width, initial-scale=1, shrink-to-fit=no'
         }
     ],
-    external_stylesheets=[dbc.themes.BOOTSTRAP]
+    external_stylesheets=[dbc.themes.BOOTSTRAP],
+    external_scripts=[
+        {
+            "src": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+            "data-ad-client": "ca-pub-1508089654065875"
+        }
+    ]
 )
 server = app.server
 app.title = APP_TITLE_NAME
 app.config.suppress_callback_exceptions = True
 app.css.config.serve_locally = False
-app.scripts.config.serve_locally = True
+app.scripts.config.serve_locally = False
