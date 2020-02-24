@@ -35,5 +35,6 @@ Create test cases and test in project level as well as test case level. Only Pub
 We welcome contributor in the category as follows
 * Contribute Code Changes
 * Contributing by Reviewing Changes
+* Contributing Documentation Changes
 * Contributing Bug Reports
 * Contributing by Testing Releases
