@@ -29,3 +29,11 @@ Create test cases and test in project level as well as test case level. Only Pub
 
 * Export All test case results in excel, pdf, docs.
 * Basic auth support
+
+
+### Contribution
+We welcome contributor in the category as follows
+* Contribute Code Changes
+* Contributing by Reviewing Changes
+* Contributing Bug Reports
+* Contributing by Testing Releases
