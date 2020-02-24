@@ -38,3 +38,9 @@ We welcome contributor in the category as follows
 * Contributing Documentation Changes
 * Contributing Bug Reports
 * Contributing by Testing Releases
+
+
+### Code Style Guide
+Please follow the style of the existing codebase.
+
+For Python code, Apache Spark follows PEP 8 with one exception: lines can be up to 120 characters in length, not 79.
