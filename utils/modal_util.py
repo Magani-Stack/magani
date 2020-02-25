@@ -39,7 +39,7 @@ class CreateTestCaseModal(CreateModal):
     def get_form(self):
         project_input = dbc.FormGroup(
             [
-                dbc.Label("API", html_for="Test_Case_Project_ID"),
+                dbc.Label("Project", html_for="Test_Case_Project_ID"),
                 dcc.Dropdown(id="Test_Case_Project_ID", options=[{'label': self.project, 'value': self.project}],
                              value=self.project,
                              multi=False),
