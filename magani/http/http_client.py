@@ -2,6 +2,8 @@ from enum import Enum
 from urllib import request as client
 from urllib.error import HTTPError
 
+from magani.auth.auth import Auth
+
 CONTENT_TYPE_VALUE = "application/json"
 
 HTTP_OK = 200
@@ -80,12 +82,10 @@ def http_error_handler(function):
 
 class HttpClient:
 
-    def __init__(self, api):
+    def __init__(self, api, auth_type=""):
         self.base_url = api
         self.request = client.Request(self.base_url)
-        self.request.headers = {
-            "content-type": CONTENT_TYPE_VALUE,
-        }
+        self.request.headers = Auth(auth_type).header
 
     def method(self, _key):
         data = {

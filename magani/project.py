@@ -41,7 +41,9 @@ def get_test_cards(project):
 
 
 def layout(project):
+    project = project.replace("%20"," ")
     projects = read_project_file()
+    print("[x[Project] for x in projects] :", [x["Project"] for x in projects])
     is_exist = project in [x["Project"] for x in projects]
     if is_exist:
         return html.Div(
