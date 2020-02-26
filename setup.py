@@ -16,7 +16,10 @@ license_x_y = " : ".join(x for x in license_x.split("\n")[:3] if x)
 
 description = "{} \n\n {}".format(description, license_x_y)
 
-requirements = ['magani', "assets", "data", "utils", "."]
+requirements = [
+    ".",
+    "magani", "assets", "data", "magani.http", "magani.auth", "magani.utils"
+]
 
 install_requires = [x.strip() for x in install_requires.split("\n") if x]
 
@@ -33,5 +36,9 @@ setup(
     long_description_content_type="text/markdown",
     include_package_data=True,
     install_requires=install_requires,
-    data_files=[("assets", ["assets/mg.jpg", "assets/favicon.ico"]), ("data", ["data/projects/projects.json"])]
+    data_files=[("assets", ["assets/mg.jpg", "assets/favicon.ico"])],
+    scripts=["script/magani.bat", "script/magani.sh"],
+    package_data={
+        'magani': ['data\projects\projects.json'],
+    }
 )

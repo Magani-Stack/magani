@@ -9,7 +9,7 @@ from flask import redirect
 from config import APP_TITLE_NAME, SUB_TITLE_NAME
 from config import MAGANI_HOST, MAGANI_PORT
 from magani import home, project, run_test_case, delete_test_case, export_text_case
-from server import app
+from magani_server import app
 
 header = html.Div(
     dbc.Row(

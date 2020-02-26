@@ -4,7 +4,7 @@ from datetime import datetime
 import pandas as pd
 from flask import send_file
 
-from utils.file_util import read_project_file
+from magani.utils.file_util import read_project_file
 
 
 def layout(project):
