@@ -2,11 +2,11 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import json
-from server import app
-from utils.card_util import CreateTestCard
-from utils.modal_util import CreateTestCaseModal
+from magani_server import app
+from magani.utils.card_util import CreateTestCard
+from magani.utils.modal_util import CreateTestCaseModal
 from datetime import datetime
-from utils.file_util import read_project_file, write_project_file
+from magani.utils.file_util import read_project_file, write_project_file
 
 
 def get_test_cards(project):

@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-from utils.file_util import read_project_file, write_project_file
+from magani.utils.file_util import read_project_file, write_project_file
 
 
 def layout(pathname):

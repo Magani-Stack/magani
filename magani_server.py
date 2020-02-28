@@ -14,13 +14,7 @@ app = dash.Dash(
             'content': 'width=device-width, initial-scale=1, shrink-to-fit=no'
         }
     ],
-    external_stylesheets=[dbc.themes.BOOTSTRAP],
-    external_scripts=[
-        {
-            "src": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
-            "data-ad-client": "ca-pub-1508089654065875"
-        }
-    ]
+    external_stylesheets=[dbc.themes.BOOTSTRAP]
 )
 server = app.server
 app.title = APP_TITLE_NAME

@@ -37,6 +37,7 @@ class CreateTestCaseModal(CreateModal):
         )
 
     def get_form(self):
+        print("self.project : ", self.project)
         project_input = dbc.FormGroup(
             [
                 dbc.Label("Project", html_for="Test_Case_Project_ID"),

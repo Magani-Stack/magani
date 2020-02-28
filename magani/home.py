@@ -2,9 +2,9 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import json
-from server import app
-from utils.card_util import CreateProjectCard
-from utils.file_util import read_project_file
+from magani_server import app
+from magani.utils.card_util import CreateProjectCard
+from magani.utils.file_util import read_project_file, write_project_file
 
 
 def project_list():
@@ -66,19 +66,10 @@ create_modal = dbc.Modal(
     centered=True,
 )
 
-xxx = {
-    "data-ad-client": "ca-pub-1508089654065875",
-    "data-ad-slot": "1234567890"
-}
 
 def create_project():
     return html.Div([
         dbc.Button("Create Project", id="Create_Project_ID"),
-        html.Div(
-            html.Ins(
-                style={"display": "inline-block", "width": "728px", "height": "90px"}, **xxx,
-            )
-        ),
         create_modal
     ],
         style={"text-align": "center", "margin-bottom": "32px"})
@@ -121,8 +112,6 @@ def toggle_modal(n1, n2, is_open, project, description):
                 "TestCase": []
             }
             projects.append(p)
-            with open("data/projects/projects.json", "w") as f:
-                f.writelines(json.dumps(projects, indent=4, sort_keys=True))
-                f.write("\n")
+            write_project_file(projects)
         return not is_open
     return is_open
