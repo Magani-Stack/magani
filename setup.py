@@ -39,6 +39,6 @@ setup(
     data_files=[("assets", ["assets/mg.jpg", "assets/favicon.ico"])],
     scripts=["script/magani.bat", "script/magani.sh"],
     package_data={
-        'magani': ['data\projects\projects.json'],
+        # 'magani': ['data\projects\projects.json'],
     }
 )
