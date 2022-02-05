@@ -1,5 +1,5 @@
 import dash_bootstrap_components as dbc
-import dash_html_components as html
+from dash import html
 from dash.dependencies import Input, Output, State
 import json
 from magani_server import app
@@ -29,14 +29,14 @@ def project_list():
     )
 
 
-email_input = dbc.FormGroup(
+email_input = dbc.Form(
     [
         dbc.Label("Project Name", html_for="Contact_Email_Id"),
         dbc.Input(type="text", id="Create_Project_Name_ID", placeholder="Enter the project name"),
     ]
 )
 
-message_input = dbc.FormGroup(
+message_input = dbc.Form(
     [
         dbc.Label("Project Description", html_for="Create_Project_Description_Id"),
         dbc.Textarea(

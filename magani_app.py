@@ -1,14 +1,15 @@
 from datetime import datetime
 
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output, State
 from flask import redirect
 
 from config import APP_TITLE_NAME, SUB_TITLE_NAME
 from config import MAGANI_HOST, MAGANI_PORT
 from magani import home, project, run_test_case, delete_test_case, export_text_case
+from magani.export_text_case import FILE_FORMATS
 from magani_server import app
 
 header = html.Div(
@@ -68,14 +69,14 @@ header = html.Div(
     style={"max-width": "100%"}
 )
 
-email_input = dbc.FormGroup(
+email_input = dbc.Form(
     [
         dbc.Label("Email", html_for="Contact_Email_Id"),
         dbc.Input(type="email", id="Contact_Email_Id", placeholder="Enter Your Email"),
     ]
 )
 
-message_input = dbc.FormGroup(
+message_input = dbc.Form(
     [
         dbc.Label("Message", html_for="Contact_Message_Id"),
         dbc.Textarea(
@@ -169,17 +170,21 @@ def display_page(pathname):
             return delete_test_case.layout(pathname)
         elif str(pathname).split("/")[-1] == "test":
             return run_test_case.layout(pathname)
-        elif str(pathname).split("/")[-1] == "export":
-            return redirect("{}".format(pathname), code=302)
+        elif str(pathname).split("/")[-2] == "export":
+            print("pathname", pathname)
+            if str(pathname).split("/")[-1] in FILE_FORMATS:
+                return redirect("{}".format(pathname), code=302)
+            else:
+                return export_text_case.invalid_file_format_html()
         else:
             home.layout()
     else:
         return dbc.Container([html.H1("404")])
 
 
-@app.server.route('/<project>/export')
-def download_file(project):
-    return export_text_case.layout(project)
+@app.server.route('/<project_name>/export/<format_type>')
+def download_file(project_name, format_type):
+    return export_text_case.layout(project_name, format_type)
 
 
 @app.callback(

@@ -1,5 +1,5 @@
 import dash_bootstrap_components as dbc
-import dash_html_components as html
+from dash import html
 
 
 class CreateCard:
@@ -27,8 +27,10 @@ class CreateProjectCard(CreateCard):
                                          href="{}/test".format(project_name), style={"float": "left"}),
                             # dbc.CardLink(dbc.Button("Open", style={"margin-right": "20px"}, color="info"),
                             #              href=project_name),
-                            html.A(dbc.Button("Export", style={"margin-right": "32px"}, color="secondary"),
-                                   href="{}/export".format(project_name)),
+                            html.A(dbc.Button("Export CSV", style={"margin-right": "32px"}, color="secondary"),
+                                   href="{}/export/csv".format(project_name)),
+                            html.A(dbc.Button("Export Excel", style={"margin-right": "32px"}, color="secondary"),
+                                   href="{}/export/excel".format(project_name)),
                             dbc.CardLink(dbc.Button("Delete", color="danger", style={"margin-right": "16px"}),
                                          href="{}/delete".format(project_name), style={"float": "right"}),
                             # dbc.Badge("Success", style={"float": "right"})

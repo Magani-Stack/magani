@@ -23,13 +23,41 @@ Create test cases and test in project level as well as test case level. Only Pub
 
 ### Reports
 
-* Export Project wise csv file 
+* Export Project wise CSV file
+* Export Project wise Excel file
 
 ### Future Support
 
-* Export All test case results in excel, pdf, docs.
+* Export All test case results in pdf, docs.
 * Basic auth support
 
+## Setup
+
+To use the software python is required.
+
+Open the terminal & follow the instructions 
+
+Type to install Magani 
+
+    $ pip install magani
+
+Type to run the Magani software
+
+    $ magani
+
+**Note**:
+
+* It will support for Windows & Linux
+
+## Developer Setup
+
+Clone it
+
+    $ git clone https://github.com/Magani-Stack/magani.git
+
+Run
+
+    $ python magani_app.py
 
 ### Contribution
 We welcome contributor in the category as follows
