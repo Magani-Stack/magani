@@ -18,7 +18,7 @@ description = "{} \n\n {}".format(description, license_x_y)
 
 requirements = [
     ".",
-    "magani", "assets", "data", "magani.http", "magani.auth", "magani.utils"
+    "magani", "assets", "magani.data.projects", "magani.http", "magani.auth", "magani.utils"
 ]
 
 install_requires = [x.strip() for x in install_requires.split("\n") if x]
