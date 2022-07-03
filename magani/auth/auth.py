@@ -36,9 +36,6 @@ class Auth(NoAuth, BasicAuth):
             BasicAuth.__init__(self, **kwargs)
         else:
             NoAuth.__init__(self)
-            self.header = {
-                "content-type": CONTENT_TYPE_VALUE,
-            }
 
 
 if __name__ == "__main__":

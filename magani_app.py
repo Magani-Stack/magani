@@ -157,6 +157,7 @@ app.layout = html.Div(
               [Input('url', 'pathname')])
 def display_page(pathname):
     print("path : ", pathname, type(pathname))
+    pathname = pathname.replace("%20", " ")
     print(pathname and len(str(pathname).split("/")) == 2)
 
     paths = pathname.split("/") if pathname else pathname

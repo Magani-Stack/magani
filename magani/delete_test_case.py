@@ -5,10 +5,11 @@ from magani.utils.file_util import read_project_file, write_project_file
 
 
 def layout(pathname):
-    lt = str(pathname).strip("/").split("/")
+    lt = str(pathname).replace("%20", " ").strip("/").split("/")
     project = lt[0]
     action = lt[-1]
     api_id = lt[1] if len(lt) == 3 else None
+    print("id ->", api_id)
 
     projects_new = read_project_file()
     projects_delete = [x for x in projects_new if x["Project"] == project]
@@ -19,6 +20,7 @@ def layout(pathname):
             projects_new.remove(pr)
         if api_id:
             apis = [y for x in projects_delete for y in x["TestCase"] if y["ID"] == api_id]
+            print("apis =>", apis)
             for api in apis:
                 projects_delete[0]["TestCase"].remove(api)
 

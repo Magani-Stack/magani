@@ -48,7 +48,6 @@ class CreateTestCard(CreateCard):
     def __init__(self, project, api, api_id, method, status):
         super().__init__()
         print("status", status)
-        status_color = "success" if "success" == status.lower() else "danger"
         self.card = dbc.Card(
             dbc.CardBody(
                 [
@@ -59,9 +58,18 @@ class CreateTestCard(CreateCard):
                                      href="{}/{}/test".format(project, api_id)),
                         dbc.CardLink(dbc.Button("Delete", color="danger", style={"margin-right": "16px"}),
                                      href="{}/{}/delete".format(project, api_id), style={"float": "right"}),
-                        dbc.Badge(status, color=status_color, style={"float": "center"})
+                        dbc.Badge(status, color=self.get_test_status_badge_color(status), style={"float": "center"})
                     ], )
                 ]
             ),
             style={"width": "20rem"},
         )
+
+    @staticmethod
+    def get_test_status_badge_color(status: str):
+        color = "warning"
+        if "success" == status.lower():
+            color = "success"
+        elif "fail" in status.lower():
+            color = "danger"
+        return color

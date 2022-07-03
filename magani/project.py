@@ -95,7 +95,7 @@ def toggle_modal(n1, n2, is_open, project, api, method, body):
                 "API": api,
                 "Body": json.dumps(body) if body else None,
                 "Method": method,
-                "Status": "Success"
+                "Status": "Waiting for Testing"
             }
             p["TestCase"].append(t)
             write_project_file(projects)

@@ -19,7 +19,7 @@ class RunTestCase:
                     [
                         dbc.Col(
                             html.H2("Method : {}".format(test_case["Method"]),
-                                    style={"text-align": "left", "color": "yellow"}),
+                                    style={"text-align": "left", "color": "darkgoldenrod"}),
                             style={"width": 6}
                         ),
                         dbc.Col(
@@ -29,7 +29,7 @@ class RunTestCase:
                         ),
                     ],
                 ),
-                html.P("Response : {}".format(response.body))
+                html.P("Response : {}".format(response.body), style={"overflow-y": "auto", "height": "300px"})
             ]
         )
         test_case["ResponseBody"] = response.body
