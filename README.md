@@ -67,6 +67,8 @@ We welcome contributor in the category as follows
 * Contributing Bug Reports
 * Contributing by Testing Releases
 
+Register : https://forms.gle/R9d7t8eNyMK2yCqv7
+
 
 ### Code Style Guide
 Please follow the style of the existing codebase.
